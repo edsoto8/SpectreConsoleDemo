@@ -7,4 +7,8 @@
     <RootNamespace>vscode_remote_try_dotnet</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.49.1" />
+  </ItemGroup>
+
 </Project>
