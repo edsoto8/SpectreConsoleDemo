@@ -1,0 +1,113 @@
+ID,Hero Name,Real Name,Powers,Universe,Team,Power Level,Status,Type
+1,Spider-Man,Peter Parker,Web-slinging/Wall-crawling/Spider-sense,Marvel,Avengers,75,Active,Hero
+2,Iron Man,Tony Stark,Powered Armor/Energy Blasts/Genius Intellect,Marvel,Avengers,85,Active,Hero
+3,Captain America,Steve Rogers,Enhanced Strength/Shield Combat/Leadership,Marvel,Avengers,70,Active,Hero
+4,Thor,Thor Odinson,Lightning Control/Super Strength/Flight,Marvel,Avengers,95,Active,Hero
+5,Hulk,Bruce Banner,Unlimited Strength/Durability/Regeneration,Marvel,Avengers,98,Active,Hero
+6,Black Widow,Natasha Romanoff,Martial Arts/Espionage/Acrobatics,Marvel,Avengers,60,Active,Hero
+7,Hawkeye,Clint Barton,Archery/Martial Arts/Tactical Genius,Marvel,Avengers,55,Active,Hero
+8,Scarlet Witch,Wanda Maximoff,Reality Manipulation/Chaos Magic/Telepathy,Marvel,Avengers,99,Active,Hero
+9,Vision,N/A,Density Control/Solar Blast/Flight,Marvel,Avengers,88,Active,Hero
+10,Black Panther,T'Challa,Enhanced Agility/Vibranium Suit/Combat Expert,Marvel,Avengers,78,Deceased,Hero
+11,Doctor Strange,Stephen Strange,Sorcery/Dimension Travel/Time Control,Marvel,Avengers,92,Active,Hero
+12,Captain Marvel,Carol Danvers,Energy Absorption/Flight/Super Strength,Marvel,Avengers,95,Active,Hero
+13,Wolverine,Logan,Regeneration/Adamantium Claws/Enhanced Senses,Marvel,X-Men,82,Active,Hero
+14,Storm,Ororo Munroe,Weather Control/Flight/Lightning,Marvel,X-Men,85,Active,Hero
+15,Cyclops,Scott Summers,Optic Blasts/Tactical Leadership/Combat,Marvel,X-Men,72,Active,Hero
+16,Jean Grey,Jean Grey,Telepathy/Telekinesis/Phoenix Force,Marvel,X-Men,97,Deceased,Hero
+17,Magneto,Erik Lehnsherr,Magnetism Control/Metal Manipulation/Flight,Marvel,Brotherhood,93,Active,Villain
+18,Professor X,Charles Xavier,Telepathy/Mind Control/Psychic Shield,Marvel,X-Men,90,Active,Hero
+19,Deadpool,Wade Wilson,Regeneration/Combat Expert/Swordsmanship,Marvel,X-Force,70,Active,Anti-Hero
+20,Gambit,Remy LeBeau,Kinetic Energy/Card Throwing/Charm,Marvel,X-Men,68,Active,Hero
+21,Superman,Clark Kent,Flight/Super Strength/Heat Vision/Invulnerability,DC,Justice League,99,Active,Hero
+22,Batman,Bruce Wayne,Martial Arts/Gadgets/Detective Skills,DC,Justice League,80,Active,Hero
+23,Wonder Woman,Diana Prince,Super Strength/Flight/Combat Expert,DC,Justice League,93,Active,Hero
+24,The Flash,Barry Allen,Super Speed/Time Travel/Lightning,DC,Justice League,95,Active,Hero
+25,Green Lantern,Hal Jordan,Power Ring/Will Constructs/Flight,DC,Justice League,88,Active,Hero
+26,Aquaman,Arthur Curry,Aquatic Control/Super Strength/Marine Telepathy,DC,Justice League,85,Active,Hero
+27,Cyborg,Victor Stone,Tech Interface/Cannon Blasts/Enhanced Strength,DC,Justice League,78,Active,Hero
+28,Green Arrow,Oliver Queen,Archery/Martial Arts/Trick Arrows,DC,Justice League,62,Active,Hero
+29,Shazam,Billy Batson,Magic Lightning/Flight/Super Strength,DC,Justice League,92,Active,Hero
+30,Martian Manhunter,J'onn J'onzz,Telepathy/Shape-shifting/Intangibility,DC,Justice League,94,Active,Hero
+31,Supergirl,Kara Zor-El,Flight/Super Strength/Heat Vision,DC,Justice League,96,Active,Hero
+32,Nightwing,Dick Grayson,Acrobatics/Escrima Sticks/Martial Arts,DC,Titans,68,Active,Hero
+33,Batgirl,Barbara Gordon,Martial Arts/Hacking/Detective Skills,DC,Titans,65,Active,Hero
+34,Zatanna,Zatanna Zatara,Sorcery/Spell Casting/Telekinesis,DC,Justice League,88,Active,Hero
+35,Hawkman,Carter Hall,Flight/Combat Expert/Nth Metal Armor,DC,Justice League,74,Retired,Hero
+36,Ant-Man,Scott Lang,Size Reduction/Size Growth/Ant Control,Marvel,Avengers,65,Active,Hero
+37,Wasp,Janet van Dyne,Size Reduction/Energy Blasts/Flight,Marvel,Avengers,63,Active,Hero
+38,Falcon,Sam Wilson,Flight/Bird Communication/Combat,Marvel,Avengers,68,Active,Hero
+39,War Machine,James Rhodes,Powered Armor/Heavy Weapons/Flight,Marvel,Avengers,82,Active,Hero
+40,Spider-Woman,Jessica Drew,Venom Blasts/Wall-crawling/Pheromones,Marvel,Avengers,72,Active,Hero
+41,Ms. Marvel,Kamala Khan,Elasticity/Size Change/Regeneration,Marvel,Avengers,70,Active,Hero
+42,Nova,Richard Rider,Flight/Energy Blasts/Nova Force,Marvel,Guardians,80,Active,Hero
+43,Star-Lord,Peter Quill,Energy Pistols/Flight/Leadership,Marvel,Guardians,62,Active,Hero
+44,Gamora,Gamora,Master Combat/Speed/Enhanced Durability,Marvel,Guardians,75,Active,Hero
+45,Rocket,Rocket Raccoon,Tech Expert/Heavy Weapons/Tactical Planning,Marvel,Guardians,58,Active,Hero
+46,Groot,Groot,Regeneration/Plant Control/Size Change,Marvel,Guardians,76,Active,Hero
+47,Drax,Drax the Destroyer,Super Strength/Durability/Combat Expert,Marvel,Guardians,79,Active,Hero
+48,Silver Surfer,Norrin Radd,Power Cosmic/Flight/Energy Manipulation,Marvel,Heralds,97,Active,Hero
+49,Blue Beetle,Jaime Reyes,Scarab Armor/Energy Weapons/Flight,DC,Titans,70,Active,Hero
+50,Booster Gold,Michael Jon Carter,Time Travel/Force Field/Laser Blasts,DC,Justice League International,66,Active,Hero
+51,Thor Girl,Tarene,Lightning Control/Super Strength/Flight,Marvel,Avengers,88,Active,Hero
+52,She-Hulk,Jennifer Walters,Super Strength/Durability/Legal Expertise,Marvel,Avengers,91,Active,Hero
+53,Moon Knight,Marc Spector,Combat Expert/Gadgets/Lunar Empowerment,Marvel,Avengers,72,Active,Hero
+54,Daredevil,Matt Murdock,Radar Sense/Martial Arts/Acrobatics,Marvel,Defenders,68,Active,Hero
+55,Luke Cage,Carl Lucas,Unbreakable Skin/Super Strength/Combat,Marvel,Defenders,80,Active,Hero
+56,Iron Fist,Danny Rand,Chi Manipulation/Martial Arts/Iron Fist,Marvel,Defenders,75,Active,Hero
+57,Jessica Jones,Jessica Jones,Super Strength/Flight/Invulnerability,Marvel,Defenders,74,Active,Hero
+58,Ghost Rider,Johnny Blaze,Hellfire/Penance Stare/Supernatural Strength,Marvel,None,87,Active,Anti-Hero
+59,Blade,Eric Brooks,Vampire Powers/Martial Arts/Sword Combat,Marvel,None,73,Active,Hero
+60,Punisher,Frank Castle,Military Combat/Weaponry/Tactical Genius,Marvel,None,60,Active,Anti-Hero
+61,Elektra,Elektra Natchios,Martial Arts/Sai Combat/Stealth,Marvel,None,67,Active,Anti-Hero
+62,Nick Fury,Nick Fury,Military Genius/Espionage/Combat,Marvel,S.H.I.E.L.D.,65,Retired,Hero
+63,Maria Hill,Maria Hill,Tactical Combat/Leadership/Espionage,Marvel,S.H.I.E.L.D.,62,Active,Hero
+64,Phil Coulson,Phil Coulson,Combat/Espionage/Leadership,Marvel,S.H.I.E.L.D.,58,Deceased,Hero
+65,Sue Storm,Susan Storm,Invisibility/Force Fields/Energy Blasts,Marvel,Fantastic Four,84,Active,Hero
+66,Mr. Fantastic,Reed Richards,Elasticity/Super Intellect/Gadgets,Marvel,Fantastic Four,85,Active,Hero
+67,Human Torch,Johnny Storm,Fire Control/Flight/Heat Projection,Marvel,Fantastic Four,81,Active,Hero
+68,The Thing,Ben Grimm,Super Strength/Rock-like Durability/Combat,Marvel,Fantastic Four,89,Active,Hero
+69,Namor,Namor McKenzie,Aquatic Control/Super Strength/Flight,Marvel,None,88,Active,Anti-Hero
+70,Galactus,Galactus,Planet Consumption/Energy Manipulation/Size Change,Marvel,None,100,Active,Villain
+71,Cable,Nathan Summers,Telepathy/Telekinesis/Time Travel,Marvel,X-Force,86,Active,Hero
+72,Bishop,Lucas Bishop,Energy Absorption/Blaster/Time Travel,Marvel,X-Men,79,Active,Hero
+73,Colossus,Piotr Rasputin,Steel Skin/Super Strength/Durability,Marvel,X-Men,84,Active,Hero
+74,Nightcrawler,Kurt Wagner,Teleportation/Acrobatics/Swordsmanship,Marvel,X-Men,72,Active,Hero
+75,Rogue,Anna Marie,Power Absorption/Flight/Super Strength,Marvel,X-Men,88,Active,Hero
+76,Iceman,Bobby Drake,Ice Control/Cryokinesis/Ice Form,Marvel,X-Men,80,Active,Hero
+77,Beast,Henry McCoy,Enhanced Agility/Super Intellect/Combat,Marvel,X-Men,77,Active,Hero
+78,Psylocke,Betsy Braddock,Telepathy/Psi-Blade/Telekinesis,Marvel,X-Men,81,Active,Hero
+79,Legion,David Haller,Multiple Powers/Reality Warping/Telepathy,Marvel,X-Men,97,Active,Anti-Hero
+80,Quicksilver,Pietro Maximoff,Super Speed/Reflexes/Agility,Marvel,Avengers,78,Active,Hero
+81,Adam Warlock,Adam Warlock,Soul Control/Energy Blasts/Infinity Stone Control,Marvel,Guardians,94,Active,Hero
+82,Thanos,Thanos,Infinity Gauntlet/Cosmic Power/Genius Intellect,Marvel,None,100,Deceased,Villain
+83,Loki,Loki Laufeyson,Sorcery/Shape-shifting/Illusion,Marvel,Asgard,89,Active,Villain
+84,Odin,Odin Borson,Odinforce/All-Father Magic/Combat,Marvel,Asgard,99,Active,Hero
+86,Valkyrie,Brunnhilde,Combat/Flight/Asgardian Strength,Marvel,Asgard,82,Active,Hero
+87,Lex Luthor,Alexander Luthor,Genius Intellect/Power Armor/Kryptonite Weapons,DC,Legion of Doom,79,Active,Villain
+88,Joker,Unknown,Chaos/Chemistry/Unpredictability,DC,None,66,Active,Villain
+89,Harley Quinn,Harleen Quinzel,Acrobatics/Combat/Chemical Expertise,DC,Suicide Squad,68,Active,Anti-Hero
+90,Poison Ivy,Pamela Isley,Plant Control/Toxins/Mind Control,DC,None,75,Active,Villain
+91,Catwoman,Selina Kyle,Acrobatics/Theft/Whip Combat,DC,None,65,Active,Anti-Hero
+92,Two-Face,Harvey Dent,Duality/Combat/Criminal Genius,DC,None,60,Active,Villain
+93,Riddler,Edward Nygma,Genius Intellect/Trap Setting/Puzzle Mastery,DC,None,58,Active,Villain
+94,Deathstroke,Slade Wilson,Enhanced Combat/Regeneration/Tactical Genius,DC,None,84,Active,Villain
+95,Ra's al Ghul,Ra's al Ghul,Immortality/Martial Arts/Sword Combat,DC,League of Shadows,82,Active,Villain
+96,Bane,Bane,Super Strength/Combat Expert/Venom Enhancement,DC,None,80,Active,Villain
+97,Darkseid,Uxas,Omega Beams/Godhood/Reality Manipulation,DC,Apokolips,100,Active,Villain
+98,Doomsday,Unknown,Super Strength/Adaptation/Invulnerability,DC,None,98,Deceased,Villain
+99,Brainiac,Vril Dox,Superhuman Intelligence/Tech Control/Force Fields,DC,None,95,Active,Villain
+100,Black Adam,Teth-Adam,Lightning/Flight/Super Strength/Magic,DC,None,94,Active,Anti-Hero
+101,Mr. Incredible,Bob Parr,Super Strength/Durability/Combat,Pixar,The Incredibles,88,Active,Hero
+102,Elastigirl,Helen Parr,Elasticity/Shape-shifting/Agility,Pixar,The Incredibles,82,Active,Hero
+103,Violet Parr,Violet Parr,Invisibility/Force Fields/Stealth,Pixar,The Incredibles,70,Active,Hero
+104,Dash Parr,Dash Parr,Super Speed/Stamina/Reflexes,Pixar,The Incredibles,72,Active,Hero
+105,Jack-Jack Parr,Jack-Jack Parr,Multiple Powers/Transformation/Laser Vision,Pixar,The Incredibles,95,Active,Hero
+106,Frozone,Lucius Best,Ice Control/Ice Surfing/Cryokinesis,Pixar,The Incredibles,80,Active,Hero
+107,Syndrome,Buddy Pine,Zero-Point Energy/Rocket Boots/Genius Intellect,Pixar,None,78,Deceased,Villain
+108,Edna Mode,Edna Mode,Super Suit Design/Genius Intellect/Resourcefulness,Pixar,None,60,Active,Hero
+109,Mirage,Mirage,Espionage/Hacking/Deception,Pixar,None,62,Retired,Anti-Hero
+110,Screenslaver,Evelyn Deavor,Hypnosis Tech/Genius Intellect/Manipulation,Pixar,None,75,Active,Villain
+111,Voyd,Karen Fields,Portal Creation/Dimension Control/Agility,Pixar,New Supers,68,Active,Hero
+112,The Underminer,Unknown,Underground Drilling/Power Suit/Mechanical Army,Pixar,None,65,Active,Villain
+113,Antman,Scott Lang,Ant Size/Giant Size,Marvel,Avengers,75,Active,Hero
