@@ -24,6 +24,7 @@ while (true)
             "Bar Chart",
             "Calendar",
             "Status Spinner",
+            "Hero CSV Explorer",
             "Exit"
         ])
         .EnableSearch()
@@ -63,6 +64,9 @@ while (true)
             break;
         case "Status Spinner":
             ShowStatus();
+            break;
+        case "Hero CSV Explorer":
+            HeroDataExplorer.Run();
             break;
     }
 
