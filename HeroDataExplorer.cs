@@ -30,7 +30,7 @@ internal static class HeroDataExplorer
             var action = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("[bold]Choose an action[/]")
-                    .AddChoices("🦸 Select hero", "🔍 Filter data", "🔀 Sort data", "📊 Show statistics", "🎯 Select Top Count", "🚪 Exit")
+                    .AddChoices("🦸 Select hero", "🔍 Filter data", "🔀 Sort data", "📊 Show statistics", "✏️ Manage heroes", "🎯 Select Top Count", "🚪 Exit")
                     .EnableSearch()
                     .SearchPlaceholderText("[grey]Type to search demos...[/]")
                     .HighlightStyle(Style.Parse("cyan")));
@@ -68,6 +68,20 @@ internal static class HeroDataExplorer
                 ShowSummary(currentResults, heroes.Count);
                 AnsiConsole.MarkupLine("[grey]Press any key to continue...[/]");
                 System.Console.ReadKey(intercept: true);
+                continue;
+            }
+
+            if (action == "✏️ Manage heroes")
+            {
+                var dataChanged = ManageHeroes(heroes);
+                if (dataChanged)
+                {
+                    activeFilters.Clear();
+                    currentResults = GetDefaultTop(heroes, topCount);
+                    totalMatchCount = heroes.Count;
+                    currentSortColumn = null;
+                    sortDescending = false;
+                }
                 continue;
             }
 
@@ -239,6 +253,177 @@ internal static class HeroDataExplorer
         };
 
         return new HeroFilter(column, operation, value.ToString(), predicate);
+    }
+
+    private static bool ManageHeroes(List<Hero> heroes)
+    {
+        var subAction = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[bold]Manage Heroes[/]")
+                .AddChoices("➕ Add hero", "✏️ Update hero", "🗑️ Delete hero", "↩ Back")
+                .HighlightStyle(Style.Parse("cyan")));
+
+        return subAction switch
+        {
+            "➕ Add hero"   => AddHero(heroes),
+            "✏️ Update hero" => UpdateHero(heroes),
+            "🗑️ Delete hero" => DeleteHero(heroes),
+            _               => false
+        };
+    }
+
+    private static bool AddHero(List<Hero> heroes)
+    {
+        AnsiConsole.Write(new Rule("[bold green]Add New Hero[/]").RuleStyle("green dim"));
+        AnsiConsole.WriteLine();
+
+        var heroName = AnsiConsole.Prompt(
+            new TextPrompt<string>("[yellow]Hero Name:[/]")
+                .Validate(s => !string.IsNullOrWhiteSpace(s)
+                    ? ValidationResult.Success()
+                    : ValidationResult.Error("Required.")));
+
+        var realName = AnsiConsole.Prompt(
+            new TextPrompt<string>("[yellow]Real Name:[/]")
+                .Validate(s => !string.IsNullOrWhiteSpace(s)
+                    ? ValidationResult.Success()
+                    : ValidationResult.Error("Required.")));
+
+        var powers = AnsiConsole.Prompt(
+            new TextPrompt<string>("[yellow]Powers[/] [grey](avoid commas):[/]")
+                .Validate(s => !string.IsNullOrWhiteSpace(s)
+                    ? ValidationResult.Success()
+                    : ValidationResult.Error("Required.")));
+
+        var universe = PromptPickOrCustom("Universe", heroes.Select(h => h.Universe), string.Empty);
+        var team     = PromptPickOrCustom("Team",     heroes.Select(h => h.Team),     string.Empty);
+
+        var powerLevel = AnsiConsole.Prompt(
+            new TextPrompt<int>("[yellow]Power Level[/] [grey](1-100):[/]")
+                .Validate(n => n is >= 1 and <= 100
+                    ? ValidationResult.Success()
+                    : ValidationResult.Error("Enter a value between 1 and 100.")));
+
+        var status = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[yellow]Status:[/]")
+                .AddChoices("Active", "Retired", "Deceased")
+                .HighlightStyle(Style.Parse("cyan")));
+
+        var type = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[yellow]Type:[/]")
+                .AddChoices("Hero", "Villain", "Anti-Hero")
+                .HighlightStyle(Style.Parse("cyan")));
+
+        var nextId  = heroes.Count == 0 ? 1 : heroes.Max(h => h.Id) + 1;
+        var newHero = new Hero(nextId, heroName, realName, powers, universe, team, powerLevel, status, type);
+
+        heroes.Add(newHero);
+        HeroCsvRepository.SaveHeroes(heroes);
+
+        AnsiConsole.WriteLine();
+        AnsiConsole.MarkupLine($"[green]Hero [bold]{Markup.Escape(heroName)}[/] added with ID {nextId}.[/]");
+        Thread.Sleep(1000);
+        return true;
+    }
+
+    private static bool UpdateHero(List<Hero> heroes)
+    {
+        if (heroes.Count == 0)
+        {
+            AnsiConsole.MarkupLine("[yellow]No heroes to update.[/]");
+            Thread.Sleep(700);
+            return false;
+        }
+
+        var hero = PromptToPickHero(heroes, "[bold]Select hero to update[/]");
+
+        AnsiConsole.Write(new Rule($"[bold cyan]Updating: {Markup.Escape(hero.HeroName)}[/]").RuleStyle("cyan dim"));
+        AnsiConsole.WriteLine();
+
+        var field = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Which field to update?")
+                .PageSize(12)
+                .AddChoices("Hero Name", "Real Name", "Powers", "Universe", "Team", "Power Level", "Status", "Type")
+                .HighlightStyle(Style.Parse("cyan")));
+
+        Hero updated = field switch
+        {
+            "Hero Name"   => hero with { HeroName   = AnsiConsole.Prompt(new TextPrompt<string>("[yellow]Hero Name:[/]").DefaultValue(hero.HeroName)) },
+            "Real Name"   => hero with { RealName   = AnsiConsole.Prompt(new TextPrompt<string>("[yellow]Real Name:[/]").DefaultValue(hero.RealName)) },
+            "Powers"      => hero with { Powers     = AnsiConsole.Prompt(new TextPrompt<string>("[yellow]Powers[/] [grey](avoid commas):[/]").DefaultValue(hero.Powers)) },
+            "Universe"    => hero with { Universe   = PromptPickOrCustom("Universe", heroes.Select(h => h.Universe), hero.Universe) },
+            "Team"        => hero with { Team       = PromptPickOrCustom("Team",     heroes.Select(h => h.Team),     hero.Team) },
+            "Power Level" => hero with { PowerLevel = AnsiConsole.Prompt(new TextPrompt<int>("[yellow]Power Level[/] [grey](1-100):[/]").DefaultValue(hero.PowerLevel).Validate(n => n is >= 1 and <= 100 ? ValidationResult.Success() : ValidationResult.Error("Enter a value between 1 and 100."))) },
+            "Status"      => hero with { Status     = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("[yellow]Status:[/]").AddChoices("Active", "Retired", "Deceased").HighlightStyle(Style.Parse("cyan"))) },
+            "Type"        => hero with { Type       = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("[yellow]Type:[/]").AddChoices("Hero", "Villain", "Anti-Hero").HighlightStyle(Style.Parse("cyan"))) },
+            _             => hero
+        };
+
+        var index = heroes.IndexOf(hero);
+        heroes[index] = updated;
+        HeroCsvRepository.SaveHeroes(heroes);
+
+        AnsiConsole.MarkupLine($"[green]{Markup.Escape(field)} updated.[/]");
+        Thread.Sleep(800);
+        return true;
+    }
+
+    private static bool DeleteHero(List<Hero> heroes)
+    {
+        if (heroes.Count == 0)
+        {
+            AnsiConsole.MarkupLine("[yellow]No heroes to delete.[/]");
+            Thread.Sleep(700);
+            return false;
+        }
+
+        var hero = PromptToPickHero(heroes, "[bold red]Select hero to delete[/]");
+
+        AnsiConsole.WriteLine();
+        DisplayHeroDetails(hero);
+        AnsiConsole.WriteLine();
+
+        var confirmed = AnsiConsole.Prompt(
+            new ConfirmationPrompt($"[red]Delete [bold]{Markup.Escape(hero.HeroName)}[/]? This cannot be undone.[/]"));
+
+        if (!confirmed)
+        {
+            AnsiConsole.MarkupLine("[grey]Delete cancelled.[/]");
+            Thread.Sleep(600);
+            return false;
+        }
+
+        heroes.Remove(hero);
+        HeroCsvRepository.SaveHeroes(heroes);
+
+        AnsiConsole.MarkupLine($"[red]{Markup.Escape(hero.HeroName)} deleted.[/]");
+        Thread.Sleep(800);
+        return true;
+    }
+
+    private static string PromptPickOrCustom(string label, IEnumerable<string> existingValues, string defaultValue)
+    {
+        var options = existingValues
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(v => v)
+            .Append("✏️ Custom...")
+            .ToList();
+
+        var pick = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title($"[yellow]{label}:[/]")
+                .PageSize(12)
+                .AddChoices(options)
+                .HighlightStyle(Style.Parse("cyan")));
+
+        return pick == "✏️ Custom..."
+            ? AnsiConsole.Prompt(
+                new TextPrompt<string>($"[yellow]Enter {label}:[/]")
+                    .DefaultValue(string.IsNullOrWhiteSpace(defaultValue) ? "" : defaultValue))
+            : pick;
     }
 
     private static IEnumerable<Hero> ApplyActiveFilters(IEnumerable<Hero> heroes, IReadOnlyCollection<HeroFilter> activeFilters)
@@ -588,6 +773,27 @@ internal static class HeroDataExplorer
 
 internal static class HeroCsvRepository
 {
+    public static void SaveHeroes(List<Hero> heroes)
+    {
+        var path = ResolveCsvPath();
+
+        if (path is null)
+        {
+            AnsiConsole.MarkupLine("[red]Could not resolve CSV path — changes were not saved.[/]");
+            return;
+        }
+
+        var lines = new List<string>(heroes.Count + 1)
+        {
+            "ID,Hero Name,Real Name,Powers,Universe,Team,Power Level,Status,Type"
+        };
+
+        lines.AddRange(heroes.Select(h =>
+            $"{h.Id},{h.HeroName},{h.RealName},{h.Powers},{h.Universe},{h.Team},{h.PowerLevel},{h.Status},{h.Type}"));
+
+        File.WriteAllLines(path, lines);
+    }
+
     public static List<Hero> LoadHeroes()
     {
         var path = ResolveCsvPath();

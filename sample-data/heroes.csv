@@ -80,10 +80,9 @@ ID,Hero Name,Real Name,Powers,Universe,Team,Power Level,Status,Type
 79,Legion,David Haller,Multiple Powers/Reality Warping/Telepathy,Marvel,X-Men,97,Active,Anti-Hero
 80,Quicksilver,Pietro Maximoff,Super Speed/Reflexes/Agility,Marvel,Avengers,78,Active,Hero
 81,Adam Warlock,Adam Warlock,Soul Control/Energy Blasts/Infinity Stone Control,Marvel,Guardians,94,Active,Hero
-82,Thanos,Thanos,Infinity Gauntlet/Cosmic Power/Genius Intellect,Marvel,None,100,Active,Villain
+82,Thanos,Thanos,Infinity Gauntlet/Cosmic Power/Genius Intellect,Marvel,None,100,Deceased,Villain
 83,Loki,Loki Laufeyson,Sorcery/Shape-shifting/Illusion,Marvel,Asgard,89,Active,Villain
 84,Odin,Odin Borson,Odinforce/All-Father Magic/Combat,Marvel,Asgard,99,Active,Hero
-85,Sif,Lady Sif,Combat Expert/Warrior Skills/Superhuman Strength,Marvel,Asgard,76,Active,Hero
 86,Valkyrie,Brunnhilde,Combat/Flight/Asgardian Strength,Marvel,Asgard,82,Active,Hero
 87,Lex Luthor,Alexander Luthor,Genius Intellect/Power Armor/Kryptonite Weapons,DC,Legion of Doom,79,Active,Villain
 88,Joker,Unknown,Chaos/Chemistry/Unpredictability,DC,None,66,Active,Villain
@@ -111,3 +110,4 @@ ID,Hero Name,Real Name,Powers,Universe,Team,Power Level,Status,Type
 110,Screenslaver,Evelyn Deavor,Hypnosis Tech/Genius Intellect/Manipulation,Pixar,None,75,Active,Villain
 111,Voyd,Karen Fields,Portal Creation/Dimension Control/Agility,Pixar,New Supers,68,Active,Hero
 112,The Underminer,Unknown,Underground Drilling/Power Suit/Mechanical Army,Pixar,None,65,Active,Villain
+113,Antman,Scott Lang,Ant Size/Giant Size,Marvel,Avengers,75,Active,Hero
