@@ -193,11 +193,67 @@ static void ShowBarChart()
 
 static void ShowCalendar()
 {
-    var calendar = new Calendar(DateTime.Today)
-        .HeaderStyle(Style.Parse("bold white on blue"));
+    var date = DateTime.Today;
+    var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+    var daysInMonth = DateTime.DaysInMonth(date.Year, date.Month);
+    var startDayOfWeek = (int)firstDayOfMonth.DayOfWeek;
 
-    AnsiConsole.Write(calendar);
-    AnsiConsole.MarkupLine("[grey]Calendar control for date-centric views.[/]");
+    var calendar = new Table()
+        .Border(TableBorder.Rounded)
+        .BorderColor(Color.Cyan1)
+        .AddColumn(new TableColumn("[red]Sun[/]").Centered())
+        .AddColumn(new TableColumn("[yellow]Mon[/]").Centered())
+        .AddColumn(new TableColumn("[yellow]Tue[/]").Centered())
+        .AddColumn(new TableColumn("[yellow]Wed[/]").Centered())
+        .AddColumn(new TableColumn("[yellow]Thu[/]").Centered())
+        .AddColumn(new TableColumn("[yellow]Fri[/]").Centered())
+        .AddColumn(new TableColumn("[cyan]Sat[/]").Centered());
+
+    var days = new List<string>();
+
+    // Add empty cells for days before the first of the month
+    for (int i = 0; i < startDayOfWeek; i++)
+    {
+        days.Add("[grey]--[/]");
+    }
+
+    // Add all days of the month
+    for (int day = 1; day <= daysInMonth; day++)
+    {
+        var currentDay = new DateTime(date.Year, date.Month, day);
+
+        if (currentDay == DateTime.Today)
+        {
+            days.Add($"[bold green on black]{day,2}[/]"); // Highlight today
+        }
+        else if (currentDay.DayOfWeek == DayOfWeek.Saturday || currentDay.DayOfWeek == DayOfWeek.Sunday)
+        {
+            days.Add($"[blue]{day,2}[/]"); // Weekend
+        }
+        else
+        {
+            days.Add($"{day,2}");
+        }
+    }
+
+    // Group days into weeks
+    for (int i = 0; i < days.Count; i += 7)
+    {
+        var week = days.Skip(i).Take(7).ToList();
+        while (week.Count < 7)
+        {
+            week.Add("[grey]--[/]");
+        }
+        calendar.AddRow(week.ToArray());
+    }
+
+    var panel = new Panel(calendar)
+        .Header($"[bold magenta]{date:MMMM yyyy}[/]")
+        .BorderColor(Color.Magenta1)
+        .Padding(1, 1);
+
+    AnsiConsole.Write(panel);
+    AnsiConsole.MarkupLine("\n[grey]Legend: [green]■[/] Today  [blue]■[/] Weekend[/]");
 }
 
 static void ShowStatus()
