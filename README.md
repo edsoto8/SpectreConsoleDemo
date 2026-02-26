@@ -33,14 +33,14 @@ Optional:
 
 ```bash
 dotnet restore
-dotnet run --project ./vscode-remote-try-dotnet.csproj
+dotnet run --project ./SpectreConsoleApp.csproj
 ```
 
 ## Build and publish
 
 ```bash
-dotnet build ./vscode-remote-try-dotnet.csproj
-dotnet publish ./vscode-remote-try-dotnet.csproj -c Release
+dotnet build ./SpectreConsoleApp.csproj
+dotnet publish ./SpectreConsoleApp.csproj -c Release
 ```
 
 ## Run in VS Code
@@ -62,4 +62,4 @@ If you update the devcontainer config, rebuild it via:
 
 - `Program.cs` – interactive Spectre.Console demos
 - `appsettings.json` – default app settings template
-- `vscode-remote-try-dotnet.csproj` – project file targeting `net9.0`
+- `SpectreConsoleApp.csproj` – project file targeting `net9.0`

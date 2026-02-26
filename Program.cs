@@ -3,7 +3,7 @@ using Spectre.Console;
 
 AnsiConsole.Clear();
 AnsiConsole.Write(
-    new FigletText("Spectre Demo")
+    new FigletText("Spectre Application")
     .Centered()
     .Color(Color.CornflowerBlue));
 
@@ -113,7 +113,7 @@ static void ShowTree()
     docs.AddNode("[grey]README.md[/]");
     docs.AddNode("[grey]CONTRIBUTING.md[/]");
 
-    tree.AddNode("[yellow]vscode-remote-try-dotnet.csproj[/]");
+    tree.AddNode("[yellow]SpectreConsoleApp.csproj[/]");
 
     AnsiConsole.Write(tree);
 }
