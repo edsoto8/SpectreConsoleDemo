@@ -25,6 +25,7 @@ while (true)
             "Calendar",
             "Status Spinner",
             "Hero CSV Explorer",
+            "Device Profiles",
             "Exit"
         ])
         .EnableSearch()
@@ -67,6 +68,9 @@ while (true)
             break;
         case "Hero CSV Explorer":
             HeroDataExplorer.Run();
+            break;
+        case "Device Profiles":
+            DeviceExplorer.Run();
             break;
     }
 

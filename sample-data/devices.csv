@@ -1,0 +1,60 @@
+TerminalID,Location,Address,Type,Manufacturer,Model,CustomerID,Region,Status,SoftwareVersion,LastService
+TRM-0001,First National Bank - Main Branch,100 Commerce St,ATM,NCR,SelfServ 84,CUST-001,Central,Active,v9.4.2,2025-12-10
+TRM-0002,First National Bank - Northgate,450 Elm Ave,ATM,NCR,SelfServ 87,CUST-001,North,Active,v9.4.2,2025-11-22
+TRM-0004,First National Bank - Westside,200 Harbor Rd,Kiosk,NCR,Cx110,CUST-001,West,Maintenance,v5.2.1,2025-09-18
+TRM-0005,First National Bank - Airport,Terminal B Concourse,ATM,Diebold,DN Series 200,CUST-001,Central,Active,v10.1.0,2025-12-01
+TRM-0006,Metro Credit Union - HQ,55 Union Plaza,ATM,Diebold,DN Series 200,CUST-002,Central,Active,v10.1.0,2025-11-30
+TRM-0007,Metro Credit Union - Eastside,300 Oak Lane,Smart Safe,Tidel,Series 3e,CUST-002,East,Active,v2.8.4,2025-10-20
+TRM-0008,Metro Credit Union - Northview,720 Birch Dr,ATM,Diebold,DN Series 100,CUST-002,North,Offline,v10.0.5,2025-08-14
+TRM-0009,Metro Credit Union - Mall Kiosk,Northfield Mall Unit 12,Kiosk,KAL,MoniMax 5600,CUST-002,North,Active,v6.0.3,2025-12-05
+TRM-0010,Metro Credit Union - Drive-Thru,1200 Maple Way,CDM,NCR,APTRA Spectra,CUST-002,West,Active,v8.3.1,2025-11-10
+TRM-0011,Pinnacle Savings - Downtown,10 Financial Sq,ATM,Nautilus Hyosung,MX8800,CUST-003,Central,Active,v7.2.0,2025-12-15
+TRM-0012,Pinnacle Savings - University,500 College Ave,ATM,Nautilus Hyosung,MX4000W,CUST-003,East,Active,v7.1.5,2025-11-28
+TRM-0013,Pinnacle Savings - Suburb East,1400 Ridgeway Dr,Smart Safe,Brinks,CompuSafe 2000,CUST-003,East,Active,v3.0.8,2025-10-11
+TRM-0014,Pinnacle Savings - Storage Depot,90 Warehouse Ct,Recycler,Glory,CI-10,CUST-003,South,Maintenance,v4.5.1,2025-07-22
+TRM-0015,Pinnacle Savings - Westgate,650 Sundown Blvd,ATM,Nautilus Hyosung,MX8800,CUST-003,West,Active,v7.2.0,2025-12-02
+TRM-0016,Cornerstone Bank - Main St,22 Main Street,ATM,NCR,SelfServ 34,CUST-004,Central,Active,v8.9.0,2025-12-08
+TRM-0017,Cornerstone Bank - Industrial,404 Factory Rd,Smart Safe,Tidel,Series 4C,CUST-004,East,Active,v2.9.1,2025-11-15
+TRM-0018,Cornerstone Bank - Lakefront,88 Lakeside Dr,Kiosk,Diebold,Vynamic Xperience,CUST-004,North,Active,v5.5.0,2025-12-20
+TRM-0019,Cornerstone Bank - Southgate,1900 Gateway Blvd,ATM,NCR,SelfServ 87,CUST-004,South,Offline,v9.3.7,2025-06-30
+TRM-0020,Cornerstone Bank - Branch West,340 Pioneer Ave,CDM,Diebold,DN Series 400,CUST-004,West,Active,v10.2.1,2025-11-05
+TRM-0021,Retail Express - Store 01,1000 Shoppers Way,Smart Safe,Brinks,CompuSafe Galileo,CUST-005,North,Active,v3.1.0,2025-12-18
+TRM-0022,Retail Express - Store 02,2000 Commerce Blvd,Smart Safe,Tidel,Series 3e,CUST-005,South,Active,v2.8.4,2025-12-10
+TRM-0023,Retail Express - Store 03,3000 Market St,Smart Safe,Tidel,Series 4C,CUST-005,East,Maintenance,v2.9.1,2025-09-05
+TRM-0024,Retail Express - Store 04,4000 Retail Dr,Smart Safe,Brinks,CompuSafe 2000,CUST-005,West,Active,v3.0.8,2025-11-28
+TRM-0025,Retail Express - Store 05,5000 Plaza Circle,Smart Safe,Tidel,Series 3e,CUST-005,Central,Active,v2.8.4,2025-12-22
+TRM-0026,Retail Express - Store 06,600 Outlet Ave,Smart Safe,Brinks,CompuSafe Galileo,CUST-005,North,Offline,v3.1.0,2025-05-15
+TRM-0027,Retail Express - Store 07,700 Crossroads Blvd,Kiosk,Genmega,G2500,CUST-005,South,Active,v4.1.2,2025-12-01
+TRM-0028,City Transit Authority - Hub A,Transit Hub A,Kiosk,KAL,MoniMax 7000,CUST-006,Central,Active,v6.2.1,2025-12-12
+TRM-0029,City Transit Authority - Hub B,Transit Hub B,Kiosk,KAL,MoniMax 7000,CUST-006,North,Active,v6.2.1,2025-11-30
+TRM-0030,City Transit Authority - Hub C,Transit Hub C,Kiosk,KAL,MoniMax 5600,CUST-006,East,Maintenance,v6.0.3,2025-10-18
+TRM-0031,City Transit Authority - Hub D,Transit Hub D,Kiosk,Genmega,G2500,CUST-006,South,Active,v4.1.2,2025-12-05
+TRM-0032,City Transit Authority - Airport,Airport Departures Level 2,ATM,NCR,SelfServ 84,CUST-006,West,Active,v9.4.2,2025-12-01
+TRM-0033,City Transit Authority - Stadium,Stadium Main Gate,ATM,Diebold,DN Series 200,CUST-006,Central,Active,v10.1.0,2025-11-20
+TRM-0034,Pacific Financial - HQ,1 Pacific Tower,ATM,NCR,SelfServ 87,CUST-007,West,Active,v9.4.2,2025-12-14
+TRM-0035,Pacific Financial - Branch N,100 Northshore Ave,ATM,NCR,SelfServ 84,CUST-007,North,Active,v9.4.2,2025-11-25
+TRM-0036,Pacific Financial - Branch S,200 Southshore Dr,CDM,NCR,APTRA Spectra,CUST-007,South,Active,v8.3.1,2025-11-08
+TRM-0037,Pacific Financial - Branch E,300 Eastshore Rd,Smart Safe,Brinks,CompuSafe Galileo,CUST-007,East,Decommissioned,v3.0.0,2024-03-10
+TRM-0038,Pacific Financial - Vault,Pacific Vault Center,Recycler,Glory,CI-50,CUST-007,West,Active,v5.1.0,2025-12-10
+TRM-0039,Pacific Financial - Coin Room,Pacific Operations Bldg,Recycler,Giesecke Devrient,CashCenter XL,CUST-007,West,Active,v2.4.0,2025-11-01
+TRM-0040,Pacific Financial - Drive ATM,9 Harbor Bypass,ATM,Nautilus Hyosung,MX4000W,CUST-007,West,Offline,v7.1.5,2025-07-04
+TRM-0041,Harbor Hospitality - Hotel A,100 Harbor Blvd,ATM,Genmega,GT3000,CUST-008,Central,Active,v3.9.1,2025-12-18
+TRM-0042,Harbor Hospitality - Hotel B,200 Harbor Blvd,ATM,Genmega,G2500,CUST-008,Central,Active,v4.1.2,2025-12-10
+TRM-0043,Harbor Hospitality - Casino Floor,55 Lucky Lane,ATM,NCR,SelfServ 34,CUST-008,Central,Active,v8.9.0,2025-12-20
+TRM-0044,Harbor Hospitality - Casino Bar,55 Lucky Lane Bar Level,ATM,Genmega,GT3000,CUST-008,Central,Active,v3.9.1,2025-11-28
+TRM-0045,Harbor Hospitality - Convention Ctr,10 Convention Dr,Kiosk,KAL,MoniMax 5600,CUST-008,Central,Maintenance,v6.0.3,2025-09-30
+TRM-0046,Heritage Trust - Headquarters,77 Heritage Sq,ATM,Diebold,DN Series 200,CUST-009,East,Active,v10.1.0,2025-12-16
+TRM-0047,Heritage Trust - Midtown,190 Midtown Ave,ATM,Diebold,DN Series 100,CUST-009,Central,Active,v10.0.5,2025-11-18
+TRM-0048,Heritage Trust - Uptown,460 Uptown Blvd,Smart Safe,Tidel,Series 4C,CUST-009,North,Active,v2.9.1,2025-12-08
+TRM-0049,Heritage Trust - Suburban,980 Suburbia Dr,ATM,Nautilus Hyosung,MX8800,CUST-009,East,Offline,v7.2.0,2025-08-22
+TRM-0050,Heritage Trust - Old Branch,5 Historic Ave,ATM,NCR,SelfServ 34,CUST-009,East,Decommissioned,v8.5.0,2024-01-15
+TRM-0051,Apex Logistics - Depot 1,1 Industrial Pkwy,Smart Safe,Tidel,Series 3e,CUST-010,North,Active,v2.8.4,2025-12-05
+TRM-0052,Apex Logistics - Depot 2,2 Industrial Pkwy,Smart Safe,Brinks,CompuSafe 2000,CUST-010,South,Active,v3.0.8,2025-11-22
+TRM-0053,Apex Logistics - Depot 3,3 Industrial Pkwy,Smart Safe,Brinks,CompuSafe Galileo,CUST-010,East,Active,v3.1.0,2025-12-12
+TRM-0054,Apex Logistics - Depot 4,4 Industrial Pkwy,Smart Safe,Tidel,Series 4C,CUST-010,West,Maintenance,v2.9.1,2025-10-01
+TRM-0055,Apex Logistics - HQ Kiosk,10 Apex Tower,Kiosk,Diebold,Vynamic Xperience,CUST-010,Central,Active,v5.5.0,2025-12-19
+TRM-0056,Apex Logistics - Recycler Vault,Apex Secure Vault,Recycler,Glory,CI-10,CUST-010,Central,Active,v4.5.1,2025-11-14
+TRM-0057,First National Bank - Harbor ATM,Fishermans Wharf Dock 3,ATM,NCR,SelfServ 84,CUST-001,East,Active,v9.4.2,2025-12-08
+TRM-0058,First National Bank - Stadium,City Stadium Gate 1,ATM,Diebold,DN Series 200,CUST-001,Central,Active,v10.1.0,2025-11-10
+TRM-0059,Metro Credit Union - Drive Safe,900 West Service Rd,Smart Safe,Tidel,Series 4C,CUST-002,West,Active,v2.9.1,2025-12-03
+TRM-0060,Pinnacle Savings - Old Town,14 Heritage Way,ATM,Nautilus Hyosung,MX4000W,CUST-003,Central,Decommissioned,v6.9.0,2023-11-01
