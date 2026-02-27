@@ -17,6 +17,7 @@ while (true)
         .AddChoices(
         [
             "Panel & Markup",
+            "Colors & Styles",
             "Table",
             "Tree",
             "Progress",
@@ -44,6 +45,9 @@ while (true)
     {
         case "Panel & Markup":
             ShowPanelAndMarkup();
+            break;
+        case "Colors & Styles":
+            ShowColorsAndStyles();
             break;
         case "Table":
             ShowTable();
@@ -88,6 +92,133 @@ static void ShowPanelAndMarkup()
     AnsiConsole.Write(panel);
     AnsiConsole.WriteLine();
     AnsiConsole.MarkupLine("[green]Styles[/], [underline]underline[/], and [bold]bold[/] can be combined.");
+}
+
+static void ShowColorsAndStyles()
+{
+    // ── Text Decorations ──────────────────────────────────────────────────
+    AnsiConsole.Write(new Rule("[bold]Text Decorations[/]").RuleStyle("grey"));
+    AnsiConsole.WriteLine();
+
+    var decorTable = new Table()
+        .Border(TableBorder.Rounded)
+        .AddColumn(new TableColumn("[grey]Decoration[/]").Width(18))
+        .AddColumn("[grey]Markup Syntax[/]")
+        .AddColumn("[grey]Example[/]");
+
+    decorTable.AddRow(new Markup("Bold"),          new Markup("[grey][[bold]]..[[/bold]][/]"),         new Markup("[bold]The quick brown fox[/]"));
+    decorTable.AddRow(new Markup("Italic"),        new Markup("[grey][[italic]]..[[/italic]][/]"),       new Markup("[italic]The quick brown fox[/]"));
+    decorTable.AddRow(new Markup("Underline"),     new Markup("[grey][[underline]]..[[/]][/]"),         new Markup("[underline]The quick brown fox[/]"));
+    decorTable.AddRow(new Markup("Strikethrough"), new Markup("[grey][[strikethrough]]..[[/]][/]"),     new Markup("[strikethrough]The quick brown fox[/]"));
+    decorTable.AddRow(new Markup("Dim"),           new Markup("[grey][[dim]]..[[/dim]][/]"),             new Markup("[dim]The quick brown fox[/]"));
+    decorTable.AddRow(new Markup("Reverse"),       new Markup("[grey][[reverse]]..[[/reverse]][/]"),     new Markup("[reverse]The quick brown fox[/]"));
+    decorTable.AddRow(new Markup("Invert"),        new Markup("[grey][[black on white]][/]"),           new Markup("[black on white] The quick brown fox [/]"));
+    decorTable.AddRow(new Markup("Bold + Italic"), new Markup("[grey][[bold italic]]..[[/]][/]"),       new Markup("[bold italic]The quick brown fox[/]"));
+    decorTable.AddRow(new Markup("Bold + Under."), new Markup("[grey][[bold underline]]..[[/]][/]"),    new Markup("[bold underline]The quick brown fox[/]"));
+
+    AnsiConsole.Write(decorTable);
+    AnsiConsole.WriteLine();
+
+    // ── Standard Colours ─────────────────────────────────────────────────
+    AnsiConsole.Write(new Rule("[bold]Standard Colours[/]").RuleStyle("grey"));
+    AnsiConsole.WriteLine();
+
+    var colorGroups = new (string Label, string Markup)[]
+    {
+        ("Red",          "[red]████ Red[/]"),
+        ("Green",        "[green]████ Green[/]"),
+        ("Blue",         "[blue]████ Blue[/]"),
+        ("Yellow",       "[yellow]████ Yellow[/]"),
+        ("Magenta",      "[magenta]████ Magenta[/]"),
+        ("Cyan",         "[cyan]████ Cyan[/]"),
+        ("White",        "[white]████ White[/]"),
+        ("Grey",         "[grey]████ Grey[/]"),
+        ("Aqua",         "[aqua]████ Aqua[/]"),
+        ("Lime",         "[lime]████ Lime[/]"),
+        ("Orange",       "[orange3]████ Orange[/]"),
+        ("Purple",       "[mediumpurple]████ Purple[/]"),
+        ("Teal",         "[teal]████ Teal[/]"),
+        ("Gold",         "[gold1]████ Gold[/]"),
+        ("Hot Pink",     "[hotpink]████ Hot Pink[/]"),
+        ("Cornflower",   "[cornflowerblue]████ Cornflower[/]"),
+    };
+
+    var colorGrid = new Columns(colorGroups.Select(c => new Markup(c.Markup)).ToArray())
+    {
+        Expand = false,
+    };
+    AnsiConsole.Write(colorGrid);
+    AnsiConsole.WriteLine();
+
+    // ── Foreground on Background ──────────────────────────────────────────
+    AnsiConsole.Write(new Rule("[bold]Foreground on Background[/]").RuleStyle("grey"));
+    AnsiConsole.WriteLine();
+
+    var bgTable = new Table()
+        .Border(TableBorder.Rounded)
+        .AddColumn(new TableColumn("[grey]Name[/]").Width(14))
+        .AddColumn("[grey]Markup Syntax[/]")
+        .AddColumn("[grey]Example[/]");
+
+    bgTable.AddRow(new Markup("Success"),  new Markup("[grey][[bold green on black]][/]"),        new Markup("[bold green on black]  ✔  Operation succeeded  [/]"));
+    bgTable.AddRow(new Markup("Warning"),  new Markup("[grey][[bold black on yellow]][/]"),       new Markup("[bold black on yellow]  ⚠  Proceed with caution  [/]"));
+    bgTable.AddRow(new Markup("Error"),    new Markup("[grey][[bold white on red]][/]"),          new Markup("[bold white on red]  ✘  Something went wrong  [/]"));
+    bgTable.AddRow(new Markup("Info"),     new Markup("[grey][[bold white on blue]][/]"),         new Markup("[bold white on blue]  ℹ  Here is some info  [/]"));
+    bgTable.AddRow(new Markup("Muted"),    new Markup("[grey][[grey on black]][/]"),              new Markup("[grey on black]  ·  Secondary content  [/]"));
+    bgTable.AddRow(new Markup("Inverted"), new Markup("[grey][[black on white]][/]"),             new Markup("[black on white]  ◆  High contrast block  [/]"));
+    bgTable.AddRow(new Markup("Accent"),   new Markup("[grey][[bold black on aqua]][/]"),         new Markup("[bold black on aqua]  ★  Featured item  [/]"));
+
+    AnsiConsole.Write(bgTable);
+    AnsiConsole.WriteLine();
+
+    // ── Programmatic Style Object ─────────────────────────────────────────
+    AnsiConsole.Write(new Rule("[bold]Programmatic Style Object[/]").RuleStyle("grey"));
+    AnsiConsole.WriteLine();
+
+    Style[] styles =
+    [
+        new(foreground: Color.Red,    background: Color.White,   decoration: Decoration.Bold | Decoration.Underline),
+        new(foreground: Color.Black,  background: Color.Yellow,  decoration: Decoration.Bold),
+        new(foreground: Color.White,  background: Color.Blue,    decoration: Decoration.Italic),
+        new(foreground: Color.Lime,   background: Color.Black,   decoration: Decoration.Dim),
+        new(foreground: Color.White,  background: Color.HotPink, decoration: Decoration.Bold | Decoration.Strikethrough),
+    ];
+
+    string[] labels = ["Danger", "Warning", "Informational", "Subtle", "Deprecated"];
+
+    var styleTable = new Table()
+        .Border(TableBorder.Rounded)
+        .AddColumn(new TableColumn("[grey]Name[/]").Width(16))
+        .AddColumn("[grey]fg / bg / decoration[/]")
+        .AddColumn("[grey]Result[/]");
+
+    for (int i = 0; i < styles.Length; i++)
+    {
+        var s = styles[i];
+        var desc = $"[grey]{s.Foreground} on {s.Background} | {s.Decoration}[/]";
+        styleTable.AddRow(new Markup(labels[i]), new Markup(desc), new Markup($" {labels[i]} ", s));
+    }
+
+    AnsiConsole.Write(styleTable);
+    AnsiConsole.WriteLine();
+
+    // ── Colour Spectrum Rule ──────────────────────────────────────────────
+    AnsiConsole.Write(new Rule("[bold]True-Colour Spectrum[/]").RuleStyle("grey"));
+    AnsiConsole.WriteLine();
+
+    int termWidth = Math.Min(AnsiConsole.Profile.Width, 80);
+    var spectrumMarkup = string.Concat(Enumerable.Range(0, termWidth).Select(i =>
+    {
+        int r = (int)(Math.Sin(i * Math.PI / termWidth) * 255);
+        int g = (int)(Math.Sin(i * Math.PI / termWidth + 2 * Math.PI / 3) * 255);
+        int b = (int)(Math.Sin(i * Math.PI / termWidth + 4 * Math.PI / 3) * 255);
+        r = Math.Clamp(r, 0, 255);
+        g = Math.Clamp(g, 0, 255);
+        b = Math.Clamp(b, 0, 255);
+        return $"[#{r:X2}{g:X2}{b:X2}]█[/]";
+    }));
+    AnsiConsole.MarkupLine(spectrumMarkup);
+    AnsiConsole.WriteLine();
 }
 
 static void ShowTable()
