@@ -157,8 +157,6 @@ internal static class CalendarViewer
 
     private static void RenderEventList(DateOnly viewDate)
     {
-        int daysInMonth = DateTime.DaysInMonth(viewDate.Year, viewDate.Month);
-
         var monthEvents = _events
             .Where(e => e.Key.Year == viewDate.Year && e.Key.Month == viewDate.Month)
             .OrderBy(e => e.Key)
