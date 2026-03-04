@@ -365,7 +365,7 @@ internal static class CalendarViewer
         foreach (var (key, evts) in monthEvents)
         {
             string target = $"{key:MMM d} – ";
-            var match = evts.FirstOrDefault(e => picked == $"{key:MMM d} – {e}");
+            var match = evts.FirstOrDefault(e => picked == target + e);
             if (match != null)
             {
                 evts.Remove(match);
