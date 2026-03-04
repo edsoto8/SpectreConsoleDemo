@@ -25,6 +25,7 @@ while (true)
             "Calendar",
             "Status Spinner",
             "Hero CSV Explorer",
+            "Countdown Timer",
             "Exit"
         ])
         .EnableSearch()
@@ -60,13 +61,16 @@ while (true)
             ShowBarChart();
             break;
         case "Calendar":
-            ShowCalendar();
+            CalendarViewer.Run();
             break;
         case "Status Spinner":
             ShowStatus();
             break;
         case "Hero CSV Explorer":
             HeroDataExplorer.Run();
+            break;
+        case "Countdown Timer":
+            ShowCountdownTimer();
             break;
     }
 
@@ -195,71 +199,6 @@ static void ShowBarChart()
     AnsiConsole.Write(chart);
 }
 
-static void ShowCalendar()
-{
-    var date = DateTime.Today;
-    var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
-    var daysInMonth = DateTime.DaysInMonth(date.Year, date.Month);
-    var startDayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-
-    var calendar = new Table()
-        .Border(TableBorder.Rounded)
-        .BorderColor(Color.Cyan1)
-        .AddColumn(new TableColumn("[red]Sun[/]").Centered())
-        .AddColumn(new TableColumn("[yellow]Mon[/]").Centered())
-        .AddColumn(new TableColumn("[yellow]Tue[/]").Centered())
-        .AddColumn(new TableColumn("[yellow]Wed[/]").Centered())
-        .AddColumn(new TableColumn("[yellow]Thu[/]").Centered())
-        .AddColumn(new TableColumn("[yellow]Fri[/]").Centered())
-        .AddColumn(new TableColumn("[cyan]Sat[/]").Centered());
-
-    var days = new List<string>();
-
-    // Add empty cells for days before the first of the month
-    for (int i = 0; i < startDayOfWeek; i++)
-    {
-        days.Add("[grey]--[/]");
-    }
-
-    // Add all days of the month
-    for (int day = 1; day <= daysInMonth; day++)
-    {
-        var currentDay = new DateTime(date.Year, date.Month, day);
-
-        if (currentDay == DateTime.Today)
-        {
-            days.Add($"[bold green on black]{day,2}[/]"); // Highlight today
-        }
-        else if (currentDay.DayOfWeek == DayOfWeek.Saturday || currentDay.DayOfWeek == DayOfWeek.Sunday)
-        {
-            days.Add($"[blue]{day,2}[/]"); // Weekend
-        }
-        else
-        {
-            days.Add($"{day,2}");
-        }
-    }
-
-    // Group days into weeks
-    for (int i = 0; i < days.Count; i += 7)
-    {
-        var week = days.Skip(i).Take(7).ToList();
-        while (week.Count < 7)
-        {
-            week.Add("[grey]--[/]");
-        }
-        calendar.AddRow(week.ToArray());
-    }
-
-    var panel = new Panel(calendar)
-        .Header($"[bold magenta]{date:MMMM yyyy}[/]")
-        .BorderColor(Color.Magenta1)
-        .Padding(1, 1);
-
-    AnsiConsole.Write(panel);
-    AnsiConsole.MarkupLine("\n[grey]Legend: [green]■[/] Today  [blue]■[/] Weekend[/]");
-}
-
 static void ShowStatus()
 {
     AnsiConsole.Status()
@@ -270,6 +209,52 @@ static void ShowStatus()
         });
 
     AnsiConsole.MarkupLine("[green]Completed sample status workflow.[/]");
+}
+
+static void ShowCountdownTimer()
+{
+    var seconds = AnsiConsole.Prompt(
+        new TextPrompt<int>("[bold]Countdown from how many seconds?[/]")
+            .PromptStyle("cyan")
+            .ValidationErrorMessage("[red]Please enter a number between 1 and 99[/]")
+            .Validate(n => n is >= 1 and <= 99));
+
+    AnsiConsole.WriteLine();
+
+    var table = new Table()
+        .Border(TableBorder.None)
+        .HideHeaders()
+        .Centered()
+        .AddColumn(new TableColumn(string.Empty).Centered());
+
+    AnsiConsole.Live(table)
+        .AutoClear(false)
+        .Start(ctx =>
+        {
+            for (int i = seconds; i >= 0; i--)
+            {
+                var color = i switch
+                {
+                    0 => Color.Red,
+                    <= 3 => Color.OrangeRed1,
+                    <= 10 => Color.Yellow,
+                    _ => Color.Green
+                };
+
+                var label = i == 0 ? "TIME'S UP" : i.ToString();
+
+                table.Rows.Clear();
+                table.AddRow(new FigletText(label).Centered().Color(color));
+                table.AddRow(new Markup(i == 0
+                    ? "[bold red]  Boom!  [/]"
+                    : $"[grey]  {i} second{(i == 1 ? "" : "s")} remaining  [/]").Centered());
+
+                ctx.Refresh();
+
+                if (i > 0)
+                    Thread.Sleep(1000);
+            }
+        });
 }
 
 static void Pause()
