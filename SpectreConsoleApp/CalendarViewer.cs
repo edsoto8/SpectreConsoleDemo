@@ -350,7 +350,7 @@ internal static class CalendarViewer
         // Build flat list of "date – label" choices
         var choices = monthEvents
             .SelectMany(kv => kv.Value.Select(label => (Key: kv.Key, Label: label)))
-            .Select(x => $"{x.Key:MMM d} – {x.Label}")
+            .Select(x => $"{x.Key:MMM d} – {Markup.Escape(x.Label)}")
             .ToList();
 
         choices.Add("Cancel");
