@@ -178,7 +178,7 @@ internal static class CalendarViewer
             string dateFmt = isToday
                 ? $"[bold green]{date:ddd, MMM d}[/]"
                 : $"[white]{date:ddd, MMM d}[/]";
-            table.AddRow(dateFmt, string.Join(", ", evts.Select(e => $"[yellow]{e}[/]")));
+            table.AddRow(dateFmt, string.Join(", ", evts.Select(e => $"[yellow]{Markup.Escape(e)}[/]")));
         }
 
         AnsiConsole.Write(table);
