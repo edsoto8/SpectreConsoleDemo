@@ -1,6 +1,6 @@
 using Spectre.Console;
 
-internal static class Timer
+internal static class CountdownTimerDemo
 {
     private static readonly (string Label, TimeSpan Duration)[] QuickDefaults =
     [
