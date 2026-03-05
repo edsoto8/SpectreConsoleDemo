@@ -26,6 +26,7 @@ while (true)
             "Status Spinner",
             "Hero CSV Explorer",
             "Countdown Timer",
+            "File Explorer",
             "Exit"
         ])
         .EnableSearch()
@@ -71,6 +72,9 @@ while (true)
             break;
         case "Countdown Timer":
             ShowCountdownTimer();
+            break;
+        case "File Explorer":
+            FileExplorer.Run();
             break;
     }
 
