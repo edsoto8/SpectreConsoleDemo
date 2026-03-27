@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Spectre.Console;
 
 internal static class CountdownTimerDemo
@@ -80,6 +81,7 @@ internal static class CountdownTimerDemo
 
     private static void RunCountdown(TimeSpan total)
     {
+        AnsiConsole.MarkupLine("[grey]  [bold white]Space[/] Pause/Resume   [bold white]Q / Esc[/] Cancel[/]");
         AnsiConsole.WriteLine();
 
         var table = new Table()
@@ -88,45 +90,100 @@ internal static class CountdownTimerDemo
             .Centered()
             .AddColumn(new TableColumn(string.Empty).Centered());
 
+        bool paused = false;
+        bool cancelled = false;
+        var displayRemaining = total;
+        TimeSpan accumulated = TimeSpan.Zero;
+        var sw = Stopwatch.StartNew();
+
         AnsiConsole.Live(table)
             .AutoClear(false)
             .Start(ctx =>
             {
-                var remaining = total;
+                // Force initial render
+                RefreshFrame(table, ctx, displayRemaining, paused, isFinished: false);
 
-                while (remaining >= TimeSpan.Zero)
+                while (!cancelled)
                 {
-                    var color = remaining.TotalSeconds switch
+                    // Drain any queued key presses
+                    while (Console.KeyAvailable)
                     {
-                        0               => Color.Red,
-                        <= 10           => Color.OrangeRed1,
-                        <= 60           => Color.Yellow,
-                        _               => Color.Green,
-                    };
+                        var k = Console.ReadKey(intercept: true);
+                        if (k.Key == ConsoleKey.Spacebar)
+                        {
+                            if (paused)
+                            {
+                                sw.Restart();
+                                paused = false;
+                            }
+                            else
+                            {
+                                accumulated += sw.Elapsed;
+                                sw.Reset();
+                                paused = true;
+                            }
+                        }
+                        else if (k.Key is ConsoleKey.Q or ConsoleKey.Escape)
+                        {
+                            cancelled = true;
+                            break;
+                        }
+                    }
 
-                    var timeLabel = FormatTime(remaining);
-                    var isFinished = remaining == TimeSpan.Zero;
+                    if (cancelled) break;
 
-                    table.Rows.Clear();
-                    table.AddRow(
-                        new FigletText(isFinished ? "TIME'S UP" : timeLabel)
-                            .Centered()
-                            .Color(color));
+                    var totalElapsed = accumulated + (paused ? TimeSpan.Zero : sw.Elapsed);
+                    var raw = total - totalElapsed;
+                    if (raw < TimeSpan.Zero) raw = TimeSpan.Zero;
 
-                    table.AddRow(
-                        new Markup(isFinished
-                            ? "[bold red]  Done!  [/]"
-                            : $"[grey]  {DescribeRemaining(remaining)}  [/]")
-                            .Centered());
+                    // Quantise to whole seconds so FigletText doesn't flicker every frame
+                    var newDisplay = TimeSpan.FromSeconds(Math.Floor(raw.TotalSeconds));
+                    bool changed = newDisplay != displayRemaining;
+                    displayRemaining = newDisplay;
 
-                    ctx.Refresh();
+                    if (changed || paused)
+                    {
+                        bool isFinished = displayRemaining == TimeSpan.Zero;
+                        RefreshFrame(table, ctx, displayRemaining, paused, isFinished);
+                        if (isFinished) break;
+                    }
 
-                    if (isFinished) break;
-
-                    Thread.Sleep(1000);
-                    remaining = remaining.Subtract(TimeSpan.FromSeconds(1));
+                    Thread.Sleep(50);
                 }
             });
+
+        if (cancelled)
+            AnsiConsole.MarkupLine("[red]Timer cancelled.[/]");
+    }
+
+    private static void RefreshFrame(Table table, LiveDisplayContext ctx,
+        TimeSpan remaining, bool paused, bool isFinished)
+    {
+        var color = remaining.TotalSeconds switch
+        {
+            0    => Color.Red,
+            <= 10 => Color.OrangeRed1,
+            <= 60 => Color.Yellow,
+            _    => Color.Green,
+        };
+
+        var timeLabel = FormatTime(remaining);
+
+        table.Rows.Clear();
+        table.AddRow(
+            new FigletText(isFinished ? "TIME'S UP" : timeLabel)
+                .Centered()
+                .Color(paused ? Color.Yellow : color));
+
+        table.AddRow(
+            new Markup(isFinished
+                ? "[bold red]  Done!  [/]"
+                : paused
+                    ? "[bold yellow]  PAUSED — press Space to resume  [/]"
+                    : $"[grey]  {DescribeRemaining(remaining)}  [/]")
+                .Centered());
+
+        ctx.Refresh();
     }
 
     private static string FormatTime(TimeSpan ts)

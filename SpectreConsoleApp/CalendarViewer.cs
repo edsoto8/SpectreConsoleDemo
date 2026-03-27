@@ -1,15 +1,68 @@
+using System.Text.Json;
 using Spectre.Console;
 
 internal static class CalendarViewer
 {
-    // Simple in-memory events: key = date, value = list of event labels
-    private static readonly Dictionary<DateOnly, List<string>> _events = new()
+    private static readonly string _eventsFilePath =
+        Path.Combine(AppContext.BaseDirectory, "calendar-events.json");
+
+    private static readonly Dictionary<DateOnly, List<string>> _events = [];
+
+    private static void LoadEvents()
     {
-        [new DateOnly(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day)] = ["Today's task"],
-    };
+        _events.Clear();
+
+        if (!File.Exists(_eventsFilePath))
+        {
+            // Seed with a sample event on first run
+            var today = DateOnly.FromDateTime(DateTime.Today);
+            _events[today] = ["Today's task"];
+            SaveEvents();
+            return;
+        }
+
+        try
+        {
+            var json = File.ReadAllText(_eventsFilePath);
+            var raw = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(json);
+            if (raw is null) return;
+
+            foreach (var (key, value) in raw)
+            {
+                if (DateOnly.TryParseExact(key, "yyyy-MM-dd",
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        System.Globalization.DateTimeStyles.None, out var date))
+                {
+                    _events[date] = value;
+                }
+            }
+        }
+        catch
+        {
+            // Silently ignore corrupt or unreadable file
+        }
+    }
+
+    private static void SaveEvents()
+    {
+        try
+        {
+            var raw = _events.ToDictionary(
+                kv => kv.Key.ToString("yyyy-MM-dd"),
+                kv => kv.Value);
+
+            var json = JsonSerializer.Serialize(raw, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(_eventsFilePath, json);
+        }
+        catch
+        {
+            // Silently ignore save failures (e.g. read-only filesystem)
+        }
+    }
 
     public static void Run()
     {
+        LoadEvents();
         var viewDate = new DateOnly(DateTime.Today.Year, DateTime.Today.Month, 1);
 
         while (true)
@@ -327,6 +380,7 @@ internal static class CalendarViewer
             _events[key] = [];
 
         _events[key].Add(label.Trim());
+        SaveEvents();
         AnsiConsole.MarkupLine($"[green]Event added to {key:ddd, MMM d}.[/]");
         Thread.Sleep(700);
     }
@@ -370,6 +424,7 @@ internal static class CalendarViewer
             {
                 evts.Remove(match);
                 if (evts.Count == 0) _events.Remove(key);
+                SaveEvents();
                 AnsiConsole.MarkupLine("[red]Event removed.[/]");
                 Thread.Sleep(700);
                 return;
