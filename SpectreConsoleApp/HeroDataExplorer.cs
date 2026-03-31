@@ -789,7 +789,18 @@ internal static class HeroCsvRepository
         };
 
         lines.AddRange(heroes.Select(h =>
-            $"{h.Id},{h.HeroName},{h.RealName},{h.Powers},{h.Universe},{h.Team},{h.PowerLevel},{h.Status},{h.Type}"));
+            string.Join(",", new[]
+            {
+                h.Id.ToString(),
+                QuoteCsvField(h.HeroName),
+                QuoteCsvField(h.RealName),
+                QuoteCsvField(h.Powers),
+                QuoteCsvField(h.Universe),
+                QuoteCsvField(h.Team),
+                h.PowerLevel.ToString(),
+                QuoteCsvField(h.Status),
+                QuoteCsvField(h.Type),
+            })));
 
         File.WriteAllLines(path, lines);
     }
@@ -843,7 +854,7 @@ internal static class HeroCsvRepository
 
     private static Hero ParseHero(string line)
     {
-        var fields = line.Split(',', StringSplitOptions.TrimEntries);
+        var fields = ParseCsvLine(line);
         if (fields.Length < 9)
         {
             throw new InvalidOperationException($"Invalid hero CSV row: {line}");
@@ -859,6 +870,66 @@ internal static class HeroCsvRepository
             int.Parse(fields[6]),
             fields[7],
             fields[8]);
+    }
+
+    // RFC 4180-compliant CSV line parser — handles quoted fields with embedded commas and "" escapes
+    private static string[] ParseCsvLine(string line)
+    {
+        var fields = new List<string>();
+        var sb = new System.Text.StringBuilder();
+        bool inQuotes = false;
+
+        for (int i = 0; i < line.Length; i++)
+        {
+            char c = line[i];
+
+            if (inQuotes)
+            {
+                if (c == '"')
+                {
+                    // Escaped quote ("") inside a quoted field
+                    if (i + 1 < line.Length && line[i + 1] == '"')
+                    {
+                        sb.Append('"');
+                        i++;
+                    }
+                    else
+                    {
+                        inQuotes = false;
+                    }
+                }
+                else
+                {
+                    sb.Append(c);
+                }
+            }
+            else
+            {
+                if (c == '"')
+                {
+                    inQuotes = true;
+                }
+                else if (c == ',')
+                {
+                    fields.Add(sb.ToString().Trim());
+                    sb.Clear();
+                }
+                else
+                {
+                    sb.Append(c);
+                }
+            }
+        }
+
+        fields.Add(sb.ToString().Trim());
+        return [.. fields];
+    }
+
+    private static string QuoteCsvField(string value)
+    {
+        if (value.Contains(',') || value.Contains('"') || value.Contains('\n'))
+            return $"\"{value.Replace("\"", "\"\"")}\"";
+        return value;
     }
 }
 

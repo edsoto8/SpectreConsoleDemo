@@ -1,5 +1,5 @@
 using Spectre.Console;
-
+using Spectre.Console.Json;
 
 AnsiConsole.Clear();
 AnsiConsole.Write(
@@ -12,23 +12,29 @@ while (true)
     var choice = AnsiConsole.Prompt(
         new SelectionPrompt<string>()
             .Title("[bold]Choose a demo[/]")
-            .PageSize(12)
-        .MoreChoicesText("[grey](Move up and down to see more options)[/]")
-        .AddChoices(
-        [
-            "Panel & Markup",
-            "Table",
-            "Tree",
-            "Progress",
-            "Prompts",
-            "Bar Chart",
-            "Calendar",
-            "Status Spinner",
-            "Hero CSV Explorer",
-            "Countdown Timer",
-            "File Explorer",
-            "Exit"
-        ])
+            .PageSize(20)
+            .MoreChoicesText("[grey](Move up and down to see more options)[/]")
+            .AddChoiceGroup("── Basics ──", [
+                "Panel & Markup",
+                "Table",
+                "Tree",
+                "Bar Chart",
+                "JSON Viewer",
+            ])
+            .AddChoiceGroup("── Interactive ──", [
+                "Prompts",
+                "Progress",
+                "Status Spinner",
+                "Countdown Timer",
+                "Calendar",
+                "Hero CSV Explorer",
+                "File Explorer",
+                "Layout",
+                "Exception Display",
+            ])
+            .AddChoiceGroup("── System ──", [
+                "Exit",
+            ])
         .EnableSearch()
         .SearchPlaceholderText("[grey]Type to search demos...[/]")
         .HighlightStyle(Style.Parse("cyan")));
@@ -71,10 +77,19 @@ while (true)
             HeroDataExplorer.Run();
             break;
         case "Countdown Timer":
-            ShowCountdownTimer();
+            CountdownTimerDemo.Run();
             break;
         case "File Explorer":
             FileExplorer.Run();
+            break;
+        case "Layout":
+            LayoutDemo.Run();
+            break;
+        case "Exception Display":
+            ShowExceptionDisplay();
+            break;
+        case "JSON Viewer":
+            ShowJsonViewer();
             break;
     }
 
@@ -259,6 +274,67 @@ static void ShowCountdownTimer()
                     Thread.Sleep(1000);
             }
         });
+}
+
+static void ShowExceptionDisplay()
+{
+    AnsiConsole.MarkupLine("[bold]Spectre.Console renders exceptions with rich formatting and colorized stack traces.[/]");
+    AnsiConsole.WriteLine();
+
+    var examples = new (string Label, Exception Ex)[]
+    {
+        ("ArgumentNullException",       new ArgumentNullException("heroName", "Hero name cannot be null.")),
+        ("InvalidOperationException",   CaptureInvalidOp()),
+        ("ApplicationException",        new ApplicationException("Demo pipeline failed: unexpected state in renderer.")),
+    };
+
+    foreach (var (label, ex) in examples)
+    {
+        AnsiConsole.Write(new Rule($"[grey]{Markup.Escape(label)}[/]").RuleStyle("grey").LeftJustified());
+        AnsiConsole.WriteException(ex, ExceptionFormats.ShortenPaths | ExceptionFormats.ShortenTypes);
+        AnsiConsole.WriteLine();
+    }
+}
+
+static Exception CaptureInvalidOp()
+{
+    try { throw new InvalidOperationException("Cannot process hero: power level out of valid range (1–100)."); }
+    catch (Exception ex) { return ex; }
+}
+
+static void ShowJsonViewer()
+{
+    AnsiConsole.MarkupLine("[bold]Spectre.Console's [cyan]JsonText[/] renders JSON with syntax coloring:[/]");
+    AnsiConsole.WriteLine();
+
+    const string json = """
+        {
+            "app": "SpectreConsoleDemo",
+            "version": "1.0.0",
+            "features": ["Panel", "Table", "Tree", "Progress", "Layout", "JSON"],
+            "heroes": {
+                "total": 50,
+                "universes": ["Marvel", "DC"],
+                "topHero": {
+                    "name": "Scarlet Witch",
+                    "powerLevel": 99,
+                    "status": "Active"
+                }
+            },
+            "settings": {
+                "theme": "dark",
+                "pageSize": 12,
+                "enableSearch": true
+            }
+        }
+        """;
+
+    AnsiConsole.Write(
+        new Panel(new JsonText(json))
+            .Header("[cyan]Sample JSON[/]", Justify.Center)
+            .Border(BoxBorder.Rounded)
+            .BorderColor(Color.CadetBlue)
+            .Expand());
 }
 
 static void Pause()
