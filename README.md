@@ -2,7 +2,7 @@ the rights to use your contribution. For details, visit https://cla.opensource.m
 a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
 # Spectre Console Demo
 
-Interactive .NET 9 console app that showcases common [Spectre.Console](https://spectreconsole.net/) UI components.
+Interactive .NET 10 console app that showcases common [Spectre.Console](https://spectreconsole.net/) UI components.
 
 ## What this project does
 
@@ -21,13 +21,13 @@ Each demo renders directly in the terminal and returns to the menu when you pres
 
 ## Requirements
 
-- .NET SDK 9.0+
+- .NET SDK 10.0+
 - macOS / Linux / Windows terminal
 
 Optional:
 
 - VS Code + C# extension
-- Docker + Dev Containers extension (the repo includes a .NET 9 devcontainer)
+- Docker + Dev Containers extension (the repo includes a .NET 10 devcontainer)
 
 ## Run locally
 
@@ -52,7 +52,7 @@ dotnet publish ./SpectreConsoleApp.csproj -c Release
 
 This repository includes `.devcontainer/devcontainer.json` using:
 
-- `mcr.microsoft.com/devcontainers/dotnet:1-9.0`
+- `mcr.microsoft.com/devcontainers/dotnet:1-10.0`
 
 If you update the devcontainer config, rebuild it via:
 
@@ -62,4 +62,4 @@ If you update the devcontainer config, rebuild it via:
 
 - `Program.cs` – interactive Spectre.Console demos
 - `appsettings.json` – default app settings template
-- `SpectreConsoleApp.csproj` – project file targeting `net9.0`
+- `SpectreConsoleApp.csproj` – project file targeting `net10.0`
