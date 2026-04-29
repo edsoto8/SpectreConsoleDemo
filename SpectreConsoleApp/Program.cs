@@ -28,6 +28,7 @@ while (true)
                 "Countdown Timer",
                 "Calendar",
                 "Hero CSV Explorer",
+                "Hero Battle Simulator",
                 "File Explorer",
                 "Layout",
                 "Exception Display",
@@ -75,6 +76,9 @@ while (true)
             break;
         case "Hero CSV Explorer":
             HeroDataExplorer.Run();
+            break;
+        case "Hero Battle Simulator":
+            HeroBattleSimulator.Run();
             break;
         case "Countdown Timer":
             CountdownTimerDemo.Run();
