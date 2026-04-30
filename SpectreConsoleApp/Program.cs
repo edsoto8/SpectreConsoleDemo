@@ -1,5 +1,4 @@
 using Spectre.Console;
-using Spectre.Console.Json;
 
 AnsiConsole.Clear();
 AnsiConsole.Write(
@@ -59,19 +58,19 @@ while (true)
             TreeDemo.Run();
             break;
         case "Progress":
-            ShowProgress();
+            ProgressDemo.Run();
             break;
         case "Prompts":
-            ShowPrompts();
+            PromptsDemo.Run();
             break;
         case "Bar Chart":
-            ShowBarChart();
+            BarChartDemo.Run();
             break;
         case "Calendar":
             CalendarViewer.Run();
             break;
         case "Status Spinner":
-            ShowStatus();
+            StatusSpinnerDemo.Run();
             break;
         case "Hero CSV Explorer":
             HeroDataExplorer.Run();
@@ -86,10 +85,10 @@ while (true)
             LayoutDemo.Run();
             break;
         case "Exception Display":
-            ShowExceptionDisplay();
+            ExceptionDisplayDemo.Run();
             break;
         case "JSON Viewer":
-            ShowJsonViewer();
+            JsonViewerDemo.Run();
             break;
     }
 
@@ -97,157 +96,9 @@ while (true)
     AnsiConsole.Clear();
 }
 
-
-
-static void ShowProgress()
-{
-    AnsiConsole.Progress()
-        .Columns(
-        [
-            new TaskDescriptionColumn(),
-                new ProgressBarColumn(),
-                new PercentageColumn(),
-                new ElapsedTimeColumn(),
-                new RemainingTimeColumn(),
-                new SpinnerColumn()
-        ])
-        .Start(ctx =>
-        {
-            var restore = ctx.AddTask("[green]Restore packages[/]", maxValue: 100);
-            var build = ctx.AddTask("[yellow]Build app[/]", maxValue: 100);
-            var test = ctx.AddTask("[blue]Run tests[/]", maxValue: 100);
-
-            while (!ctx.IsFinished)
-            {
-                restore.Increment(2.0);
-                build.Increment(1.5);
-                test.Increment(1.0);
-                Thread.Sleep(45);
-            }
-        });
-}
-
-static void ShowPrompts()
-{
-    var name = AnsiConsole.Prompt(
-        new TextPrompt<string>("What is your [green]name[/]?")
-            .PromptStyle("cyan")
-            .ValidationErrorMessage("[red]Please enter a valid name[/]")
-            .Validate(n => !string.IsNullOrWhiteSpace(n)));
-
-    var favorite = AnsiConsole.Prompt(
-        new SelectionPrompt<string>()
-            .Title("Pick your [bold]favorite[/] control")
-            .AddChoices("Table", "Tree", "Progress", "Prompt", "Chart"));
-
-    var addOns = AnsiConsole.Prompt(
-        new MultiSelectionPrompt<string>()
-            .Title("Select optional features")
-            .NotRequired()
-            .InstructionsText("[grey](Press [blue]<space>[/] to toggle, [green]<enter>[/] to accept)[/]")
-            .AddChoices("Markup", "Live updates", "JSON output", "Themes", "Paging"));
-
-    var summary = new Table().Border(TableBorder.MinimalHeavyHead);
-    summary.AddColumn("Field");
-    summary.AddColumn("Value");
-    summary.AddRow("Name", name);
-    summary.AddRow("Favorite", favorite);
-    summary.AddRow("Add-ons", addOns.Count == 0 ? "None" : string.Join(", ", addOns));
-
-    AnsiConsole.Write(new Panel(summary).Header("Prompt Results"));
-}
-
-static void ShowBarChart()
-{
-    var chart = new BarChart()
-        .Width(60)
-        .Label("[green bold underline]Monthly Usage[/]")
-        .CenterLabel();
-
-    chart.AddItem("Panels", 42, Color.CadetBlue);
-    chart.AddItem("Tables", 87, Color.MediumPurple);
-    chart.AddItem("Trees", 55, Color.SeaGreen2);
-    chart.AddItem("Progress", 73, Color.Yellow);
-
-    AnsiConsole.Write(chart);
-}
-
-static void ShowStatus()
-{
-    AnsiConsole.Status()
-        .Spinner(Spinner.Known.Dots)
-        .Start("Preparing terminal UI sample...", _ =>
-        {
-            Thread.Sleep(1200);
-        });
-
-    AnsiConsole.MarkupLine("[green]Completed sample status workflow.[/]");
-}
-
-static void ShowExceptionDisplay()
-{
-    AnsiConsole.MarkupLine("[bold]Spectre.Console renders exceptions with rich formatting and colorized stack traces.[/]");
-    AnsiConsole.WriteLine();
-
-    var examples = new (string Label, Exception Ex)[]
-    {
-        ("ArgumentNullException",       new ArgumentNullException("heroName", "Hero name cannot be null.")),
-        ("InvalidOperationException",   CaptureInvalidOp()),
-        ("ApplicationException",        new ApplicationException("Demo pipeline failed: unexpected state in renderer.")),
-    };
-
-    foreach (var (label, ex) in examples)
-    {
-        AnsiConsole.Write(new Rule($"[grey]{Markup.Escape(label)}[/]").RuleStyle("grey").LeftJustified());
-        AnsiConsole.WriteException(ex, ExceptionFormats.ShortenPaths | ExceptionFormats.ShortenTypes);
-        AnsiConsole.WriteLine();
-    }
-}
-
-static Exception CaptureInvalidOp()
-{
-    try { throw new InvalidOperationException("Cannot process hero: power level out of valid range (1–100)."); }
-    catch (Exception ex) { return ex; }
-}
-
-static void ShowJsonViewer()
-{
-    AnsiConsole.MarkupLine("[bold]Spectre.Console's [cyan]JsonText[/] renders JSON with syntax coloring:[/]");
-    AnsiConsole.WriteLine();
-
-    const string json = """
-        {
-            "app": "SpectreConsoleDemo",
-            "version": "1.0.0",
-            "features": ["Panel", "Table", "Tree", "Progress", "Layout", "JSON"],
-            "heroes": {
-                "total": 50,
-                "universes": ["Marvel", "DC"],
-                "topHero": {
-                    "name": "Scarlet Witch",
-                    "powerLevel": 99,
-                    "status": "Active"
-                }
-            },
-            "settings": {
-                "theme": "dark",
-                "pageSize": 12,
-                "enableSearch": true
-            }
-        }
-        """;
-
-    AnsiConsole.Write(
-        new Panel(new JsonText(json))
-            .Header("[cyan]Sample JSON[/]", Justify.Center)
-            .Border(BoxBorder.Rounded)
-            .BorderColor(Color.CadetBlue)
-            .Expand());
-}
-
 static void Pause()
 {
     AnsiConsole.WriteLine();
     AnsiConsole.MarkupLine("[grey]Press any key to return to the menu...[/]");
-    System.Console.ReadKey(intercept: true);
+    Console.ReadKey(intercept: true);
 }
