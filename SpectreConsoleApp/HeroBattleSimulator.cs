@@ -36,7 +36,7 @@ internal static class HeroBattleSimulator
     {
         var sorted = choices.OrderBy(h => h.HeroName).ToList();
         var options = sorted
-            .Select(h => $"{h.Id,3} - {Markup.Escape(h.HeroName),-22} [{Markup.Escape(h.Universe),-6}] PWR:{h.PowerLevel,3}")
+            .Select(h => $"{h.Id,3} - {Markup.Escape(h.HeroName),-22} [[{Markup.Escape(h.Universe),-6}]] PWR:{h.PowerLevel,3}")
             .ToList();
 
         var selected = AnsiConsole.Prompt(
