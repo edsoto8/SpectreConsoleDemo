@@ -56,7 +56,7 @@ while (true)
             TableDemo.Run();
             break;
         case "Tree":
-            ShowTree();
+            TreeDemo.Run();
             break;
         case "Progress":
             ShowProgress();
@@ -98,23 +98,6 @@ while (true)
 }
 
 
-static void ShowTree()
-{
-    var tree = new Tree("[bold]Project[/]")
-        .Guide(TreeGuide.Line);
-
-    var src = tree.AddNode("[blue]src[/]");
-    src.AddNode("[grey]Program.cs[/]");
-    src.AddNode("[grey]Widgets/[/]");
-
-    var docs = tree.AddNode("[green]docs[/]");
-    docs.AddNode("[grey]README.md[/]");
-    docs.AddNode("[grey]CONTRIBUTING.md[/]");
-
-    tree.AddNode("[yellow]SpectreConsoleApp.csproj[/]");
-
-    AnsiConsole.Write(tree);
-}
 
 static void ShowProgress()
 {
@@ -199,52 +182,6 @@ static void ShowStatus()
         });
 
     AnsiConsole.MarkupLine("[green]Completed sample status workflow.[/]");
-}
-
-static void ShowCountdownTimer()
-{
-    var seconds = AnsiConsole.Prompt(
-        new TextPrompt<int>("[bold]Countdown from how many seconds?[/]")
-            .PromptStyle("cyan")
-            .ValidationErrorMessage("[red]Please enter a number between 1 and 99[/]")
-            .Validate(n => n is >= 1 and <= 99));
-
-    AnsiConsole.WriteLine();
-
-    var table = new Table()
-        .Border(TableBorder.None)
-        .HideHeaders()
-        .Centered()
-        .AddColumn(new TableColumn(string.Empty).Centered());
-
-    AnsiConsole.Live(table)
-        .AutoClear(false)
-        .Start(ctx =>
-        {
-            for (int i = seconds; i >= 0; i--)
-            {
-                var color = i switch
-                {
-                    0 => Color.Red,
-                    <= 3 => Color.OrangeRed1,
-                    <= 10 => Color.Yellow,
-                    _ => Color.Green
-                };
-
-                var label = i == 0 ? "TIME'S UP" : i.ToString();
-
-                table.Rows.Clear();
-                table.AddRow(new FigletText(label).Centered().Color(color));
-                table.AddRow(new Markup(i == 0
-                    ? "[bold red]  Boom!  [/]"
-                    : $"[grey]  {i} second{(i == 1 ? "" : "s")} remaining  [/]").Centered());
-
-                ctx.Refresh();
-
-                if (i > 0)
-                    Thread.Sleep(1000);
-            }
-        });
 }
 
 static void ShowExceptionDisplay()
