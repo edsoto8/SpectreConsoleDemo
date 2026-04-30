@@ -50,10 +50,10 @@ while (true)
     switch (choice)
     {
         case "Panel & Markup":
-            ShowPanelAndMarkup();
+            PanelAndMarkupDemo.Run();
             break;
         case "Table":
-            ShowTable();
+            TableDemo.Run();
             break;
         case "Tree":
             ShowTree();
@@ -97,35 +97,6 @@ while (true)
     AnsiConsole.Clear();
 }
 
-static void ShowPanelAndMarkup()
-{
-    var panel = new Panel(new Markup("[bold yellow]Welcome to Spectre.Console![/]\n[grey]Build rich terminal apps with ease.[/]"))
-        .Border(BoxBorder.Rounded)
-        .Header("[aqua]Panel Demo[/]", Justify.Center)
-        .Expand();
-
-    AnsiConsole.Write(panel);
-    AnsiConsole.WriteLine();
-    AnsiConsole.MarkupLine("[green]Styles[/], [underline]underline[/], and [bold]bold[/] can be combined.");
-}
-
-static void ShowTable()
-{
-    var table = new Table()
-        .Border(TableBorder.Rounded)
-        .Title("[bold]Feature Matrix[/]")
-        .AddColumn("Control")
-        .AddColumn("Use Case")
-        .AddColumn("Complexity");
-
-    table.AddRow("Panel", "Emphasize key content", "Low");
-    table.AddRow("Table", "Structured datasets", "Low");
-    table.AddRow("Tree", "Hierarchical data", "Medium");
-    table.AddRow("Progress", "Long-running tasks", "Medium");
-    table.AddRow("Live", "Realtime dashboards", "High");
-
-    AnsiConsole.Write(table);
-}
 
 static void ShowTree()
 {
