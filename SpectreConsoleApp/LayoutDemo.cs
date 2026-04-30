@@ -78,7 +78,7 @@ internal static class LayoutDemo
         api.AddRow("Split rows",           "[grey].SplitRows(top, bottom)[/]");
         api.AddRow("Set ratio",            "[grey].Ratio(2)[/]");
         api.AddRow("Minimum height",       "[grey].MinimumSize(10)[/]");
-        api.AddRow("Update pane content",  "[grey]layout[\"Name\"].Update(renderable)[/]");
+        api.AddRow("Update pane content",  "[grey]layout[[\"Name\"]].Update(renderable)[/]");
         api.AddRow("Render once",          "[grey]AnsiConsole.Write(layout)[/]");
         api.AddRow("Animate / live",       "[grey]AnsiConsole.Live(layout).Start(ctx => ...)[/]");
 
